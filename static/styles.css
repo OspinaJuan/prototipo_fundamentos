@@ -1,0 +1,15 @@
+html, body {
+  height: 100%;
+}
+
+#credentials-container {
+  height: 100%;
+}
+
+.credentials-form {
+  border: 2px solid gray;
+  padding: 50px;
+  border-radius: 10px;
+  background-color: rgb(50,50,50,0.3);
+  box-shadow: 5px 5px 30px black;
+}
