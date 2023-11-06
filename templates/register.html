@@ -14,18 +14,25 @@
 <body>
   <div class="justify-content-center d-flex align-items-center flex-column" id="credentials-container">
   <h1>Registro</h1>
-  <form class="credentials-form mt-5 mb-4" action="/" method="post">
+  <form class="credentials-form mt-5 mb-4" action="/register" method="post">
     <div class="mb-3">
       <label for="usernameInput" class="form-label">Usuario</label>
-      <input type="username" class="form-control" id="usernameInput">
+      <input type="username" class="form-control" id="usernameInput" name="username">
     </div>
     <div class="mb-3">
       <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-      <input type="password" class="form-control" id="exampleInputPassword1">
+      <input type="password" class="form-control" id="exampleInputPassword1" name="password">
     </div>
     <div class="mb-3">
       <label for="exampleInputPasswordCheck1" class="form-label">Confirmar contraseña</label>
-      <input type="password" class="form-control" id="exampleInputPasswordCheck1">
+      <input type="password" class="form-control" id="exampleInputPasswordCheck1" name="confirmation">
+    </div>
+    <div class="mb-3">
+      <label for="accountType" class="form-label">Tipo de cuenta</label>
+	  <select id="userType" name="userType">
+	    <option value="admin">Admin</option>
+	    <option value="usuario">Usuario</option>
+	  </select>
     </div>
     <button type="submit" class="btn btn-primary">Entrar</button>
   </form>

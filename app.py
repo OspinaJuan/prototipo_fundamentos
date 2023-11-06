@@ -47,5 +47,28 @@ def index():
         return render_template("index.html")
 
 
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+        usertype = request.form.get("usertype") 
+
+        if not username or not password:
+            return apology("Username and password are required", "register")
+
+        existing_user = cur.execute("SELECT id FROM users WHERE username = ?", (username,)).fetchone()
+        if existing_user:
+            return apology("Username already taken", "register")
+
+        hashed_password = generate_password_hash(password)
+
+        cur.execute("INSERT INTO users (username, hash, type) VALUES (?, ?, ?)", (username, hashed_password, usertype))
+        con.commit()
+
+        return redirect("/")
+
+    else:
+        return render_template("register.html")
 
 

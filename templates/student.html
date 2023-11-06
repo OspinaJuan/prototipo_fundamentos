@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html data-bs-theme="dark">
+
+<head>
+    <title>Product Store</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/styles.css" type="text/css">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="mt-5 mb-5 me-3 d-inline-block">Product Store </h1>
+		<a href="#"> Log out</a>
+        <form action="process_order.php" method="post">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <img src="https://i.imgur.com/I86rTVl.jpg" class="card-img-top" alt="Product 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Product 1</h5>
+                            <p class="card-text">$10</p>
+                            <label for="product1">Quantity:</label>
+                            <input type="number" id="product1" name="product1" min="0" value="0">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <img src="https://i.imgur.com/I86rTVl.jpg" class="card-img-top" alt="Product 2">
+                        <div class="card-body">
+                            <h5 class="card-title">Product 2</h5>
+                            <p class="card-text">$15</p>
+                            <label for="product2">Quantity:</label>
+                            <input type="number" id="product2" name="product2" min="0" value="0">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <img src="https://i.imgur.com/I86rTVl.jpg" class="card-img-top" alt="Product 3">
+                        <div class="card-body">
+                            <h5 class="card-title">Product 3</h5>
+                            <p class="card-text">$20</p>
+                            <label for="product3">Quantity:</label>
+                            <input type="number" id="product3" name="product3" min="0" value="0">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Additional Products -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <img src="https://i.imgur.com/I86rTVl.jpg" class="card-img-top" alt="Product 4">
+                        <div class="card-body">
+                            <h5 class="card-title">Product 4</h5>
+                            <p class="card-text">$25</p>
+                            <label for="product4">Quantity:</label>
+                            <input type="number" id="product4" name="product4" min="0" value="0">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <img src="https://i.imgur.com/I86rTVl.jpg" class="card-img-top" alt="Product 5">
+                        <div class="card-body">
+                            <h5 class="card-title">Product 5</h5>
+                            <p class="card-text">$30</p>
+                            <label for="product5">Quantity:</label>
+                            <input type="number" id="product5" name="product5" min="0" value="0">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <img src="https://i.imgur.com/I86rTVl.jpg" class="card-img-top" alt="Product 6">
+                        <div class="card-body">
+                            <h5 class="card-title">Product 6</h5>
+                            <p class="card-text">$35</p>
+                            <label for="product6">Quantity:</label>
+                            <input type="number" id="product6" name="product6" min="0" value="0">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary mb-5 mt-3">Place Order</button>
+       
+
