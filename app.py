@@ -6,10 +6,11 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 app = Flask(__name__)
 
-con = sqlite3.connect("users.db")
+con = sqlite3.connect("users.db", check_same_thread=False)
 cur = con.cursor()
-def apology(message, route=None):
-    if route:
+
+def apology(message, route):
+    if route == 'index':
         return render_template("index.html", message=message)
     else:
         return render_template("register.html", message=message)
@@ -28,17 +29,16 @@ def index():
     if request.method == "POST":
         username = request.form.get("username")
         if not username:
-            return apology("Must provide a username", "index")
+            return apology("Escribe un usuario.", "index")
 
         password = request.form.get("password")
         if not password:
-            return apology("Must provide a password", "index")
+            return apology("Escribe una contraseña.", "index")
 
-        rows = cur.execute("SELECT hash, type FROM users WHERE username = ?", username)
-        rows.fetchall()
-        if not rows or not check_password_hash(rows[0][0], password):
-            return apology("Username or password not valid", "index")
-        elif rows[1][0] == "teacher":
+        user  = cur.execute("SELECT hash, type FROM users WHERE username = ?", (username,)).fetchone()
+        if not user or not check_password_hash(user[0], password):
+            return apology("Usuario o contraseña equivocado.", "index")
+        elif user[1] == "admin":
             return render_template("teacher.html")
         else:
             return render_template("student.html")
@@ -55,11 +55,11 @@ def register():
         usertype = request.form.get("usertype") 
 
         if not username or not password:
-            return apology("Username and password are required", "register")
+            return apology("Usuario y contraseña requerido.", "register")
 
         existing_user = cur.execute("SELECT id FROM users WHERE username = ?", (username,)).fetchone()
         if existing_user:
-            return apology("Username already taken", "register")
+            return apology("Nombre de usuario ya usado.", "register")
 
         hashed_password = generate_password_hash(password)
 
