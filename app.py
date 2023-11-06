@@ -39,7 +39,8 @@ def index():
         if not user or not check_password_hash(user[0], password):
             return apology("Usuario o contraseña equivocado.", "index")
         elif user[1] == "admin":
-            return render_template("teacher.html")
+            users  = cur.execute("SELECT * FROM users").fetchall()
+            return render_template("teacher.html", users=users)
         else:
             return render_template("student.html")
     
@@ -70,5 +71,4 @@ def register():
 
     else:
         return render_template("register.html")
-
 
