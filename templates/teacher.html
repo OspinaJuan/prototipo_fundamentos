@@ -15,7 +15,7 @@
   <div class="p-2">
   <a href="/">Log out</a>
   </div>
-  <div class="container height-100 d-flex align-items-center">
+  <div class="container height-100 d-flex align-items-center justify-content-center">
   <div class="text-center d-flex align-items-center row row-1" id="container-users">
     <div class="list-group-item list-group-item-action">
   	  <div class="row user-row" id="header-row">
@@ -63,19 +63,21 @@
           </div>
           <div class="modal-body">
             <!-- Add input fields for editing user details -->
-            <form>
+            <form method="post" action="edit_username">
               <div class="mb-3 row">
                 <label for="userName" class="form-label col-4">Name:</label>
-                <input type="text" class="form-control col-8" id="userName" value="{{user[1]}}">
+                <input type="text" class="form-control col-8" id="userName" name="username" value="{{user[1]}}">
+				<input type="hidden" name="id" value="{{user[0]}}">
               </div>
               <div class="mb-3 row">
                 <label for="userEmail" class="form-label col-4">Email:</label>
-                <input type="email" class="form-control col-8" id="userEmail" value="{{user[1]}}@gmail.com">
+                <input type="email" class="form-control col-8" id="userEmail" value="{{user[1]}}@gmail.com" disabled>
               </div>
               <div class="mb-3 row">
                 <label for="userCard" class="form-label col-4">Tarjeta:</label>
                 <input type="text" class="form-control col-8" id="userCard" value="card" disabled>
               </div>
+              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" id="saveChanges">Save Changes</button>
             </form>
             <!-- End of input fields for editing user details -->
           </div>
@@ -85,7 +87,6 @@
             <button type="submit" class="btn btn-danger" id="deleteUser">Delete User</button>
 		  </form>
             <button type="button" class="btn btn-primary" id="resetPassword">Reset Password</button>
-            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="saveChanges">Save Changes</button>
           </div>
         </div>
       </div>

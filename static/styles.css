@@ -32,7 +32,6 @@ html, body {
 .card-img-top {
   height: auto;
   width: 353px;
-  filter: invert(100%);
 }
 
 .form-control {

@@ -14,7 +14,7 @@ def apology(message, route):
         return render_template("index.html", message=message)
     else:
         return render_template("register.html", message=message)
-
+	
 @app.after_request
 def after_request(response):        
     """Ensure responses aren't cached"""
@@ -40,6 +40,7 @@ def index():
             return apology("Usuario o contraseña equivocado.", "index")
         elif user[1] == "admin":
             users  = cur.execute("SELECT * FROM users WHERE type = 'usuario'").fetchall()
+            print(users)
             return render_template("teacher.html", users=users)
         else:
             return render_template("student.html")
@@ -53,6 +54,7 @@ def register():
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
+        confirmation = request.form.get("confirmation")
         usertype = request.form.get("usertype") 
 
         if not username or not password:
@@ -60,7 +62,10 @@ def register():
 
         existing_user = cur.execute("SELECT id FROM users WHERE username = ?", (username,)).fetchone()
         if existing_user:
-            return apology("Nombre de usuario ya usado.", "register")
+           return apology("Nombre de usuario ya usado.", "register")
+
+        if not confirmation == password:
+           return apology("Contraseñas no concuerdan", "register")
 
         hashed_password = generate_password_hash(password)
 
@@ -81,6 +86,18 @@ def delete_user():
 	con.commit()
 	users = cur.execute("SELECT * FROM users WHERE type = 'usuario'")
 	return render_template("teacher.html", users=users)
+
+@app.route("/edit_username", methods=["POST"])
+def edit_username():
+	if not request.method == "POST":
+		return redirect("/")
+	username = request.form.get("username")
+	id = request.form.get("id")
+	cur.execute("UPDATE users SET username = ? WHERE id = ?", (username, id))
+	con.commit()
+	users = cur.execute("SELECT * FROM users WHERE type = 'usuario'")
+	return render_template("teacher.html", users=users)
+	
 
 
 
