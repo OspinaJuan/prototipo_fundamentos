@@ -12,39 +12,45 @@
 </head>
 
 <body>
+  <div class="p-2">
   <a href="/">Log out</a>
+  </div>
   <div class="container height-100 d-flex align-items-center">
   <div class="text-center d-flex align-items-center row row-1" id="container-users">
-  <div class="list-group-item list-group-item-action">
+    <div class="list-group-item list-group-item-action">
   	  <div class="row user-row" id="header-row">
-        <div class="col">
-		Usuario
-        </div>
-        <div class="col">
-          <b>Email</b>
-        </div>
-        <div class="col">
-          <b>Card</b>
-        </div>
-      </a>
-    </div>
+		<div class="col">
+		  <b>&nbsp &nbsp &nbsp Id</b>
+		</div>
+		<div class="col">
+		  <b>Usuario</b>
+		</div>
+		<div class="col">
+		  <b>Email</b>
+		</div>
+		<div class="col">
+		  <b>Tarjeta</b>
+		</div>
+		</div>
   </div>
   {% for user in users %}
   <div>
-      <button data-bs-toggle="modal" data-bs-target="#userModal{{user[0]}}" class="list-group-item list-group-item-action">
-	  <div class="row user-row">
-        <div class="col">
-          {{user[1]}}
-        </div>
-        <div class="col">
-          {{user[1]}}@gmail.com
-        </div>
-        <div class="col">
-           card
-        </div>
-      </a>
-    </div>
-	</button>
+  <button data-bs-toggle="modal" data-bs-target="#userModal{{user[0]}}" class="list-group-item list-group-item-action">
+	<div class="row user-row">
+      <div class="col">
+	    {{user[0]}}
+	  </div>
+      <div class="col">
+        {{user[1]}}
+      </div>
+	  <div class="col">
+	    {{user[1]}}@gmail.com
+	  </div>
+      <div class="col">
+        &nbsp &nbsp card
+	  </div>
+	</div>
+  </button>
     <!-- End of user data -->
 
     <!-- Modal for user details -->
@@ -67,14 +73,17 @@
                 <input type="email" class="form-control col-8" id="userEmail" value="{{user[1]}}@gmail.com">
               </div>
               <div class="mb-3 row">
-                <label for="userCard" class="form-label col-4">Card:</label>
+                <label for="userCard" class="form-label col-4">Tarjeta:</label>
                 <input type="text" class="form-control col-8" id="userCard" value="card" disabled>
               </div>
             </form>
             <!-- End of input fields for editing user details -->
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" id="deleteUser">Delete User</button>
+		  <form action="/delete_user" method="post">
+		    <input type="hidden" name="id" value="{{user[0]}}">
+            <button type="submit" class="btn btn-danger" id="deleteUser">Delete User</button>
+		  </form>
             <button type="button" class="btn btn-primary" id="resetPassword">Reset Password</button>
             <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="saveChanges">Save Changes</button>
           </div>

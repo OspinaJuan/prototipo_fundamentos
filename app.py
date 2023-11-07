@@ -39,7 +39,7 @@ def index():
         if not user or not check_password_hash(user[0], password):
             return apology("Usuario o contraseña equivocado.", "index")
         elif user[1] == "admin":
-            users  = cur.execute("SELECT * FROM users").fetchall()
+            users  = cur.execute("SELECT * FROM users WHERE type = 'usuario'").fetchall()
             return render_template("teacher.html", users=users)
         else:
             return render_template("student.html")
@@ -71,4 +71,16 @@ def register():
 
     else:
         return render_template("register.html")
+
+@app.route("/delete_user", methods=["POST"])
+def delete_user():
+	if not request.method == "POST":
+		return redirect("/")
+	id = request.form.get("id")
+	cur.execute("DELETE FROM users WHERE id = ?", (id,))
+	con.commit()
+	users = cur.execute("SELECT * FROM users WHERE type = 'usuario'")
+	return render_template("teacher.html", users=users)
+
+
 
